@@ -8,7 +8,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter App',
+      title: 'Expense Tracker',
       home: MyHomePage(),
     );
   }
@@ -26,7 +26,8 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Flutter App'),
+          centerTitle: true,
+          title: const Text('Expense tracker'),
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -40,7 +41,27 @@ class MyHomePage extends StatelessWidget {
               ),
             ),
             Column(
-              children: transactions.map((e) => Text(e.title)).toList(),
+              children: transactions
+                  .map((tx) => Card(
+                        child: Row(
+                          children: [
+                            Container(
+                              child: Text(
+                                tx.amount.toString(),
+                              ),
+                            ),
+                            Column(
+                              children: [
+                                Text(tx.title),
+                                Text(
+                                  tx.date.toString(),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ))
+                  .toList(),
             )
           ],
         ));
