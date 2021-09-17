@@ -1,4 +1,5 @@
 import 'package:expense_tracker/models/transaction.dart';
+import 'package:expense_tracker/widgets/transaction_list.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -17,11 +18,6 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatelessWidget {
   // const MyHomePage({Key? key}) : super(key: key);
-
-  final List<Transaction> transactions = [
-    Transaction('t1', 'new shoes', 200, DateTime.now()),
-    Transaction('t2', 'milk', 25, DateTime.now()),
-  ];
 
   // String titleInput = '';
   // String amountInput = '';
@@ -75,47 +71,7 @@ class MyHomePage extends StatelessWidget {
                 ),
               ),
             ),
-            Column(
-              children: transactions
-                  .map((tx) => Card(
-                        child: Row(
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 15),
-                              decoration: BoxDecoration(
-                                border:
-                                    Border.all(color: Colors.purple, width: 2),
-                              ),
-                              padding: const EdgeInsets.all(10),
-                              child: Text(
-                                '₹ ${tx.amount}',
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
-                                    color: Colors.purple),
-                              ),
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  tx.title.toUpperCase(),
-                                  style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                                Text(
-                                  DateFormat.yMMMd().format(tx.date),
-                                  style: TextStyle(color: Colors.grey),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ))
-                  .toList(),
-            )
+            TransactionList()
           ],
         ));
   }
