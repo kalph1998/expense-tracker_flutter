@@ -1,4 +1,4 @@
-import 'package:expense_tracker/transaction.dart';
+import 'package:expense_tracker/models/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
