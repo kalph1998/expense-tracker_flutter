@@ -23,6 +23,12 @@ class MyHomePage extends StatelessWidget {
     Transaction('t2', 'milk', 25, DateTime.now()),
   ];
 
+  // String titleInput = '';
+  // String amountInput = '';
+
+  final titleController = TextEditingController();
+  final amountController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,14 +53,19 @@ class MyHomePage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    const TextField(
-                      decoration: InputDecoration(labelText: 'Title'),
+                    TextField(
+                      decoration: const InputDecoration(labelText: 'Title'),
+                      controller: titleController,
                     ),
-                    const TextField(
-                      decoration: InputDecoration(labelText: 'Amount'),
+                    TextField(
+                      decoration: const InputDecoration(labelText: 'Amount'),
+                      controller: amountController,
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        print(titleController);
+                        print(amountController);
+                      },
                       child: const Text('Add Transaction'),
                       style: ButtonStyle(
                           backgroundColor:
