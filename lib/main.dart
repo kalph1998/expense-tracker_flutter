@@ -11,7 +11,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Expense Tracker',
-      theme: ThemeData(primarySwatch: Colors.purple),
+      theme: ThemeData(
+          primarySwatch: Colors.purple,
+          fontFamily: 'Quicksand',
+          textTheme: ThemeData.light().textTheme.copyWith(
+              headline6: const TextStyle(
+                  fontFamily: 'OpenSans',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18)),
+          appBarTheme: AppBarTheme(
+              textTheme: ThemeData.light().textTheme.copyWith(
+                  headline6: const TextStyle(
+                      fontFamily: 'OpenSans', fontWeight: FontWeight.bold)))),
       home: MyHomePage(),
     );
   }
@@ -26,8 +37,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransaction = [
-    Transaction('t1', 'new shoes', 200, DateTime.now()),
-    Transaction('t2', 'milk', 25, DateTime.now()),
+    // Transaction('t1', 'new shoes', 200, DateTime.now()),
+    // Transaction('t2', 'milk', 25, DateTime.now()),
   ];
 
   void _addTransaction(String title, double amount) {
@@ -66,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             Container(
               width: double.infinity,
-              child: Card(
+              child: const Card(
                 color: Colors.blueGrey,
                 child: Text('Chart'),
                 elevation: 5,
@@ -78,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
         onPressed: () {
           _startAddNewTransaction(context);
         },
