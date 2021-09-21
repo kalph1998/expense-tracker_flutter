@@ -47,6 +47,25 @@ class _NewTransactionState extends State<NewTransaction> {
               keyboardType: TextInputType.number,
               onSubmitted: (_) => {submitData},
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text('No date chosen'),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: const Text('Choose date'),
+                    style: ElevatedButton.styleFrom(
+                        primary: Theme.of(context).primaryColor,
+                        onPrimary: Colors.white,
+                        textStyle:
+                            const TextStyle(fontWeight: FontWeight.bold)),
+                  )
+                ],
+              ),
+            ),
             ElevatedButton(
               onPressed: () {
                 submitData();
