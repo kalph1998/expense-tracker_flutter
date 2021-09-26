@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class NewTransaction extends StatefulWidget {
   // const NewTransaction({Key? key}) : super(key: key);
@@ -13,19 +14,38 @@ class NewTransaction extends StatefulWidget {
 
 class _NewTransactionState extends State<NewTransaction> {
   final titleController = TextEditingController();
-
   final amountController = TextEditingController();
+  DateTime selectedDate = DateTime.now();
 
   void submitData() {
+    if (amountController.text.isEmpty) {
+      return;
+    }
     final enteredTitle = titleController.text;
     final enteredAmount = double.parse(amountController.text);
 
     if (enteredTitle.isEmpty || enteredAmount <= 0) {
       return;
     }
-    widget.addNewTransaction(enteredTitle, enteredAmount);
+    widget.addNewTransaction(enteredTitle, enteredAmount, selectedDate);
 
     Navigator.of(context).pop();
+  }
+
+  void _presentDatePicker() {
+    showDatePicker(
+            context: context,
+            initialDate: selectedDate,
+            firstDate: DateTime(2020),
+            lastDate: DateTime.now())
+        .then((value) {
+      if (value == null) {
+        return;
+      }
+      setState(() {
+        selectedDate = value;
+      });
+    });
   }
 
   @override
@@ -53,9 +73,13 @@ class _NewTransactionState extends State<NewTransaction> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text('No date chosen'),
+                  Text(selectedDate == null
+                      ? 'No date chosen'
+                      : ' Picked Date:  ${DateFormat.yMd().format(selectedDate)}'),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _presentDatePicker();
+                    },
                     child: const Text('Choose date'),
                     style: ElevatedButton.styleFrom(
                         primary: Theme.of(context).primaryColor,

@@ -7,13 +7,14 @@ class TransactionList extends StatelessWidget {
   // const TransactionList({Key? key}) : super(key: key);
 
   final List<Transaction> _userTransaction;
+  final Function deleteTransaction;
 
-  TransactionList(this._userTransaction);
+  TransactionList(this._userTransaction, this.deleteTransaction);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 300,
+        height: MediaQuery.of(context).size.height * 0.7,
         child: _userTransaction.isEmpty
             ? Column(
                 children: [
@@ -54,6 +55,15 @@ class TransactionList extends StatelessWidget {
                       subtitle: Text(
                         DateFormat.yMMMd().format(_userTransaction[index].date),
                         style: const TextStyle(color: Colors.grey),
+                      ),
+                      trailing: IconButton(
+                        icon: const Icon(
+                          Icons.delete,
+                          color: Colors.red,
+                        ),
+                        onPressed: () {
+                          deleteTransaction(_userTransaction[index].id);
+                        },
                       ),
                     ),
                   );
