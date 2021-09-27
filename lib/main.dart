@@ -4,8 +4,14 @@ import 'package:expense_tracker/models/transaction.dart';
 import 'package:expense_tracker/widgets/chart.dart';
 import 'package:expense_tracker/widgets/new_transaction.dart';
 import 'package:expense_tracker/widgets/transaction_list.dart';
+import 'package:flutter/services.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // const MyApp({Key? key}) : super(key: key);
@@ -94,8 +100,18 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: [
             Container(
-                width: double.infinity, child: Chart(_recentTransactions)),
-            TransactionList(_userTransaction, _deleteTransaction)
+                height: (MediaQuery.of(context).size.height -
+                        appBar.preferredSize.height -
+                        MediaQuery.of(context).padding.top) *
+                    0.3,
+                width: double.infinity,
+                child: Chart(_recentTransactions)),
+            Container(
+                height: (MediaQuery.of(context).size.height -
+                        appBar.preferredSize.height -
+                        MediaQuery.of(context).padding.top) *
+                    0.7,
+                child: TransactionList(_userTransaction, _deleteTransaction))
           ],
         ),
       ),
